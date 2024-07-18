@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">SpaceArticle</string>
+    <string name="news_sites">News Sites</string>
+    <string name="published_on_template">Published On %1$s</string>
+    <string name="read_full_article">Read Full Article</string>
+    <string name="search">Search</string>
+    <string name="all">All</string>
+    <string name="not_found">Not Found</string>
+    <string name="something_went_wrong_text">Something Went Wrong!!</string>
+    <string name="retry">Retry</string>
+    <string name="empty_text">Empty</string>
+    <string name="delete_text">delete</string>
+    <string-array name="news_sites_array">
+        <item>All</item>
+        <item>AmericaSpace</item>
+        <item>Arstechnica</item>
+        <item>Blue Origin</item>
+        <item>Boeing</item>
+        <item>CNBC</item>
+        <item>ElonX</item>
+        <item>ESA</item>
+        <item>Euronews</item>
+        <item>European Spaceflight</item>
+        <item>Jet Propulsion Laboratory</item>
+        <item>NASA</item>
+        <item>NASASpaceflight</item>
+        <item>National Geographic</item>
+        <item>National Space Society</item>
+        <item>Phys</item>
+        <item>Planetary Society</item>
+        <item>Reuters</item>
+        <item>Space.com</item>
+        <item>SpaceFlight Insider</item>
+        <item>Spaceflight Now</item>
+        <item>SpaceNews</item>
+        <item>SpacePolicyOnline.com</item>
+        <item>Space Scout</item>
+        <item>SpaceX</item>
+        <item>SyFy</item>
+        <item>TechCrunch</item>
+        <item>Teslarati</item>
+        <item>The Drive</item>
+        <item>The Japan Times</item>
+        <item>The Launch Pad</item>
+        <item>The National</item>
+        <item>The New York Times</item>
+        <item>The Space Devs</item>
+        <item>The Space Review</item>
+        <item>The Verge</item>
+        <item>The Wall Street Journal</item>
+        <item>United Launch Alliance</item>
+        <item>Virgin Galactic</item>
+    </string-array>
+</resources>
