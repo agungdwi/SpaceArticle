@@ -26,7 +26,7 @@ object Utils {
 
         for (i in summary.indices) {
             if (summary[i] == '.') {
-                if (i == summary.length - 1 || summary[i + 1].isWhitespace() ) {
+                if ((i == summary.length - 1 || summary[i + 1].isWhitespace()) && summary[i - 1].isLowerCase()) {
                     firstPeriodIndex = i
                     break
                 }
