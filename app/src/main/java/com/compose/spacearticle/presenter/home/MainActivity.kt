@@ -9,19 +9,23 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.compose.spacearticle.R
 import com.compose.spacearticle.databinding.ActivityMainBinding
 import com.compose.spacearticle.presenter.detail.DetailActivity
 import com.compose.spacearticle.presenter.recent.RecentSearchActivity
 import com.compose.spacearticle.ui.ArticlePagingAdapter
 import com.compose.spacearticle.ui.LoadingStateAdapter
+import com.compose.spacearticle.ui.NewsSiteAdapter
 import com.compose.spacearticle.ui.RecentSearchListAdapter
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -57,11 +61,33 @@ class MainActivity : AppCompatActivity() {
             adapterRv.submitData(lifecycle, it)
         }
 
-        binding.topSec.SpinnerAutoComplete.onItemClickListener = AdapterView.OnItemClickListener{ parent, _, position, _ ->
-            val selectedItem = parent.getItemAtPosition(position).toString()
-            viewModel.onNewSiteChanges(if (selectedItem == "All") "" else selectedItem)
+        binding.topSec.searchView.setOnQueryTextListener(object :OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.onSearch(query)
+                binding.topSec.searchView.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isEmpty()) {
+                    viewModel.onSearch("") // Handle clearing the search logic
+                }
+                return true
+            }
+        })
+
+        binding.topSec.ivRecentSearch.setOnClickListener {
+            val intent = Intent(this, RecentSearchActivity::class.java)
+            startActivity(intent)
         }
 
+        showBottomSheet()
+        setDataHandler()
+
+
+    }
+
+    private fun setDataHandler(){
         adapterRv.addLoadStateListener { combinedLoadState ->
             val loadState = combinedLoadState.refresh
 
@@ -72,21 +98,11 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-            if(loadState is LoadState.NotLoading){
-                viewModel.title.observe(this){ title ->
-                    if(title.isNotBlank() && adapterRv.itemCount < 1){
-                        binding.notfoundLy.notfoundMain.visibility = View.VISIBLE
-                    }else{
-                        binding.notfoundLy.notfoundMain.visibility = View.GONE
-                    }
-
-                }
-
-                viewModel.newsSite.observe(this){ newsSite ->
-                    if(newsSite.isNotBlank() && adapterRv.itemCount < 1){
-                        binding.notfoundLy.notfoundMain.visibility = View.VISIBLE
-                    }else{
-                        binding.notfoundLy.notfoundMain.visibility = View.GONE
+            if (loadState is LoadState.NotLoading) {
+                viewModel.title.observe(this) { title ->
+                    viewModel.newsSite.observe(this) { newsSite ->
+                        val shouldShowNotFound =( title.isNotBlank() || newsSite.isNotBlank()) && adapterRv.itemCount < 1
+                        binding.notfoundLy.notfoundMain.visibility = if (shouldShowNotFound) View.VISIBLE else View.GONE
                     }
                 }
             }
@@ -100,28 +116,33 @@ class MainActivity : AppCompatActivity() {
                 binding.errorLy.errorMain.visibility = View.GONE
             }
         }
+    }
 
-        binding.topSec.searchView.setOnQueryTextListener(object :OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                viewModel.onSearch(query,true)
-                binding.topSec.searchView.clearFocus()
-                return true
+    private fun showBottomSheet(){
+        binding.topSec.btnNewssite.setOnClickListener {
+            val bottomSheetDialog = BottomSheetDialog(this@MainActivity)
+            val view1 = layoutInflater.inflate(R.layout.site_bottom_sheet, null)
+            bottomSheetDialog.setContentView(view1)
+
+            val recyclerView: RecyclerView = view1.findViewById(R.id.newssite_rv)
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+            val newsSites = resources.getStringArray(R.array.news_sites_array)
+
+            val adapter = NewsSiteAdapter(newsSites)
+            adapter.onItemClick = { newsSite ->
+                binding.topSec.btnNewssite.text = if(newsSite == "All") "News Site" else newsSite
+                viewModel.onNewSiteChanges(if (newsSite == "All") "" else newsSite)
+                bottomSheetDialog.dismiss()
             }
 
-            override fun onQueryTextChange(newText: String): Boolean {
-                if (newText.isEmpty()) {
-                    viewModel.onSearch("", false) // Handle clearing the search logic
-                }
-                return true
-            }
-        })
+            recyclerView.adapter = adapter
 
-        binding.topSec.ivRecentSearch.setOnClickListener {
-            val intent = Intent(this, RecentSearchActivity::class.java)
-            startActivity(intent)
+            bottomSheetDialog.show()
+
+
+
         }
-
-
     }
 
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -141,11 +162,11 @@ class MainActivity : AppCompatActivity() {
 //        return super.onOptionsItemSelected(item)
 //    }
 
-    override fun onResume() {
-        super.onResume()
-        val newsSite = resources.getStringArray(R.array.news_sites_array)
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, newsSite)
-        binding.topSec.SpinnerAutoComplete.setAdapter(arrayAdapter)
-
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        val newsSite = resources.getStringArray(R.array.news_sites_array)
+//        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, newsSite)
+//        binding.topSec.SpinnerAutoComplete.setAdapter(arrayAdapter)
+//
+//    }
 }

@@ -6,8 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "recent_search")
 data class ArticleEntity (
+
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = true)
     var id: Int,
 
     @ColumnInfo(name = "title")
@@ -27,4 +28,7 @@ data class ArticleEntity (
     @ColumnInfo(name = "publishedAt")
     var publishedAt: String,
 
-    )
+    @ColumnInfo(name = "insertionTimestamp") // New field
+    var insertionTimestamp: Long
+
+)

@@ -37,6 +37,7 @@ object DataMapper {
             newsSite = input.newsSite,
             summary = input.summary,
             publishedAt = input.publishedAt,
+            insertionTimestamp = System.currentTimeMillis()
         )
 
 }

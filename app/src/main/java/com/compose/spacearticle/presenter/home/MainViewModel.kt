@@ -12,17 +12,16 @@ import com.compose.spacearticle.domain.model.Article
 import com.compose.spacearticle.domain.usecase.ArticleUseCase
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val articleUseCase:ArticleUseCase): ViewModel(){
-
+class MainViewModel(private val articleUseCase: ArticleUseCase) : ViewModel() {
 
     private val _articles = MutableLiveData<PagingData<Article>>(PagingData.empty())
     val articles: LiveData<PagingData<Article>> get() = _articles
 
     private val _newsSite = MutableLiveData("")
-    val newsSite : LiveData<String> get() = _newsSite
+    val newsSite: LiveData<String> get() = _newsSite
 
     private val _title = MutableLiveData("")
-    val title : LiveData<String> get() = _title
+    val title: LiveData<String> get() = _title
 
     private val _addRecent = MutableLiveData(false)
 
@@ -30,40 +29,40 @@ class MainViewModel(private val articleUseCase:ArticleUseCase): ViewModel(){
         fetchArticles()
     }
 
-    private fun fetchArticles(newsSite: String? = _newsSite.value, title: String? = _title.value) {
+    private fun fetchArticles() {
         viewModelScope.launch {
-            articleUseCase.getArticles(newsSite, title)
+            articleUseCase.getArticles(_newsSite.value, _title.value)
                 .cachedIn(viewModelScope)
                 .collect { pagingData ->
-                    val transformedData = if (_addRecent.value == true) {
-                        insertFirstAsRecent(pagingData)
-                    } else {
-                        pagingData
-                    }
-                    _articles.value = transformedData
+                    _articles.value = applyRecentIfNeeded(pagingData)
                 }
         }
     }
 
-    private suspend fun insertFirstAsRecent(pagingData: PagingData<Article>): PagingData<Article> {
-        var isFirst = true
-        return pagingData.map { article ->
-            if (isFirst) {
-                articleUseCase.insertRecentSearch(article)
-                isFirst = false
+    private suspend fun applyRecentIfNeeded(pagingData: PagingData<Article>): PagingData<Article> {
+        if (_addRecent.value == true) {
+            var isFirstItem = true
+            return pagingData.map { article ->
+                if (isFirstItem) {
+                    isFirstItem = false
+                    articleUseCase.insertRecentSearch(article)
+                }
+                article
             }
-            article
         }
+        return pagingData
     }
 
-    fun onNewSiteChanges(newsSite: String){
+    fun onNewSiteChanges(newsSite: String) {
         _newsSite.value = newsSite
+        _addRecent.value = _title.value?.isNotBlank()
         fetchArticles()
     }
 
-    fun onSearch(title: String, addRecent: Boolean){
+    fun onSearch(title: String) {
         _title.value = title
-        _addRecent.value = addRecent
+        _addRecent.value = _title.value?.isNotBlank()
+        Log.d("test", _addRecent.value.toString())
         fetchArticles()
     }
 

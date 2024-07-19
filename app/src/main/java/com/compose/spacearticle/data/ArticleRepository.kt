@@ -20,7 +20,7 @@ class ArticleRepository (
 
     override fun getArticles(newsSite: String?, title: String?): Flow<PagingData<Article>> {
         return Pager(
-            config = PagingConfig(pageSize = 5),
+            config = PagingConfig(pageSize = 10),
             pagingSourceFactory = { ArticlePagingSource(apiService, newsSite, title) }
         ).flow.map { pagingData ->
             pagingData.map { response ->

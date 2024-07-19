@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ArticleDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticles(articles: ArticleEntity)
 
-    @Query("SELECT * FROM recent_search")
+    @Query("SELECT * FROM recent_search ORDER BY insertionTimestamp DESC")
     fun getAllArticles(): Flow<List<ArticleEntity>>
 
     @Query("DELETE FROM recent_search")
