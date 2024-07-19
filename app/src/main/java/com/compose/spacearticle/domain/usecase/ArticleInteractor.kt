@@ -1,6 +1,5 @@
 package com.compose.spacearticle.domain.usecase
 
-import androidx.paging.PagingData
 import com.compose.spacearticle.domain.model.Article
 import com.compose.spacearticle.domain.repository.IArticleRepository
 import kotlinx.coroutines.flow.Flow

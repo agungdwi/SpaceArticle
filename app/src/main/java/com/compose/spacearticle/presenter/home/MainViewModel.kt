@@ -34,12 +34,12 @@ class MainViewModel(private val articleUseCase: ArticleUseCase) : ViewModel() {
             articleUseCase.getArticles(_newsSite.value, _title.value)
                 .cachedIn(viewModelScope)
                 .collect { pagingData ->
-                    _articles.value = applyRecentIfNeeded(pagingData)
+                    _articles.value = addRecentIfTrue(pagingData)
                 }
         }
     }
 
-    private suspend fun applyRecentIfNeeded(pagingData: PagingData<Article>): PagingData<Article> {
+    private suspend fun addRecentIfTrue(pagingData: PagingData<Article>): PagingData<Article> {
         if (_addRecent.value == true) {
             var isFirstItem = true
             return pagingData.map { article ->
@@ -62,7 +62,6 @@ class MainViewModel(private val articleUseCase: ArticleUseCase) : ViewModel() {
     fun onSearch(title: String) {
         _title.value = title
         _addRecent.value = _title.value?.isNotBlank()
-        Log.d("test", _addRecent.value.toString())
         fetchArticles()
     }
 

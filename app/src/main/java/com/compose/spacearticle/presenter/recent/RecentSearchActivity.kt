@@ -5,15 +5,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.compose.spacearticle.R
 import com.compose.spacearticle.databinding.ActivityRecentSearchBinding
 import com.compose.spacearticle.presenter.detail.DetailActivity
-import com.compose.spacearticle.presenter.home.MainViewModel
 import com.compose.spacearticle.ui.RecentSearchListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

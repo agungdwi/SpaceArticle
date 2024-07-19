@@ -1,6 +1,5 @@
 package com.compose.spacearticle.ui
 
-import android.graphics.Movie
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

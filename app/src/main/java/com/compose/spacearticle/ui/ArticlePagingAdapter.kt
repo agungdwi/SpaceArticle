@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.compose.spacearticle.R
-import com.compose.spacearticle.Utils.withDateFormat
 import com.compose.spacearticle.databinding.ArticleItemBinding
 import com.compose.spacearticle.domain.model.Article
 

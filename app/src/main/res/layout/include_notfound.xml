@@ -1,23 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/notfound_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/transparent"
     android:gravity="center"
-    tools:background="@color/black">
+    tools:background="@color/black"
+    tools:ignore="UseCompoundDrawables">
 
     <ImageView
         android:id="@+id/iv_search"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/not_found"
         android:src="@drawable/baseline_search_off_24"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        tools:tint="@color/white"/>
 
     <TextView
-        android:id="@+id/empty_text"
+        android:id="@+id/notfound_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/not_found"

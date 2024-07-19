@@ -3,6 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="icon">#FF000000</color>
-    <color name="transparent">#00000000</color>
     <color name="background">#fef7ff</color>
 </resources>

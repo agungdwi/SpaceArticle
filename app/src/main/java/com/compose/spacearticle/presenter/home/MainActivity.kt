@@ -2,18 +2,9 @@ package com.compose.spacearticle.presenter.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +15,6 @@ import com.compose.spacearticle.presenter.recent.RecentSearchActivity
 import com.compose.spacearticle.ui.ArticlePagingAdapter
 import com.compose.spacearticle.ui.LoadingStateAdapter
 import com.compose.spacearticle.ui.NewsSiteAdapter
-import com.compose.spacearticle.ui.RecentSearchListAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

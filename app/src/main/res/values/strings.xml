@@ -3,13 +3,12 @@
     <string name="news_sites">News Sites</string>
     <string name="published_on_template">Published On %1$s</string>
     <string name="read_full_article">Read Full Article</string>
-    <string name="search">Search</string>
-    <string name="all">All</string>
     <string name="not_found">Not Found</string>
     <string name="something_went_wrong_text">Something Went Wrong!!</string>
     <string name="retry">Retry</string>
     <string name="empty_text">Empty</string>
     <string name="delete_text">delete</string>
+    <string name="empty_recent_search">Empty Recent Search</string>
     <string-array name="news_sites_array">
         <item>All</item>
         <item>AmericaSpace</item>
