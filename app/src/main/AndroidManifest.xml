@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SpaceArticle"
+        android:theme="@style/Theme.SpaceArticle.Splash"
         tools:targetApi="31">
         <activity
             android:name=".presenter.recent.RecentSearchActivity"
@@ -23,7 +23,8 @@
             android:exported="false" />
         <activity
             android:name=".presenter.home.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.SpaceArticle.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

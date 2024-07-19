@@ -79,4 +79,7 @@ dependencies {
     //koin
     implementation(libs.koin.android)
     implementation(libs.koin.core)
+
+    //splashscreen
+    implementation (libs.androidx.core.splashscreen)
 }
