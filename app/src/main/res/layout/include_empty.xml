@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/empty_text"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/icon"
         android:textSize="20sp"
         android:layout_marginBottom="8dp" />
 

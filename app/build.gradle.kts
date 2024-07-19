@@ -82,4 +82,5 @@ dependencies {
 
     //splashscreen
     implementation (libs.androidx.core.splashscreen)
+
 }

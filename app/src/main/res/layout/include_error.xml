@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/something_went_wrong_text"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/icon"
         android:textSize="20sp"
         android:layout_marginBottom="8dp" />
 
