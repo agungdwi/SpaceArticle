@@ -9,6 +9,7 @@
     <string name="empty_text">Empty</string>
     <string name="delete_text">delete</string>
     <string name="empty_recent_search">Empty Recent Search</string>
+    <string name="recent_search">Recent Search</string>
     <string-array name="news_sites_array">
         <item>All</item>
         <item>AmericaSpace</item>
