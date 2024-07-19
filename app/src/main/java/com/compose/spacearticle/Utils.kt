@@ -1,6 +1,5 @@
 package com.compose.spacearticle
 
-import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
